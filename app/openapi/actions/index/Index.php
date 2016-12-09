@@ -1,11 +1,8 @@
 <?php
 
-class IndexAction extends Openapi_Action_Page {
+class Action_Index extends Openapi_Action_Page {
 
     public function execute () {
-        parent::execute(); 
-        
-        $this->setView('content', "Hello");
-        $this->display('index/index.phtml'); 
+        echo "Access Denied!"; 
     }
 }

@@ -16,25 +16,18 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
     public function _initRoute(Yaf_Dispatcher $dispatcher) {
 
         $router = $dispatcher->getRouter();
-
-        $indexRoute = new Yaf_Route_Regex(
-            '#^\/([0-9a-zA-Z]+)/?$#',
-            array(
-                'controller' => 'Short',
-                'action' => 'index'
-            ),  
-            array(
-                1 => 'url',
-            )   
-        );
-        
-        $router->addRoute('indexRoute', $indexRoute);
     }
 
 
     public function _initConfig() {
         $config = Yaf_Application::app()->getConfig();
         Yaf_Registry::set("config", $config);
+    }
+
+    public function _initLoader($dispatcher) {
+
+        //当前app的library下的目录
+        Yaf_Loader::getInstance()->registerLocalNameSpace(array("Admin"));
     }
 
     public function _initView(Yaf_Dispatcher $dispatcher) {
@@ -44,6 +37,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
     }
 
     public function _initDefaultName(Yaf_Dispatcher $dispatcher) {
-        $dispatcher->setDefaultModule("Index")->setDefaultController("Index")->setDefaultAction("index");
+        $dispatcher->setDefaultModule("Index")->setDefaultController("Index")->setDefaultAction("login");
     }
 }

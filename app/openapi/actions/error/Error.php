@@ -1,6 +1,6 @@
 <?php
 
-class ErrorAction extends Openapi_Action_Page {
+class Action_Error extends Openapi_Action_Page {
 
     public function execute ($exception) {
         parent::execute(); 

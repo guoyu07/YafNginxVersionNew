@@ -1,0 +1,26 @@
+<aside class="sidebar">
+    <div class="sidebar-container">
+        <div class="sidebar-header">
+            <div class="brand clearfix">
+                <div class="logo"><img width=80 src="/static/images/logo-100.png"> </div> Chope Url 
+             </div>
+             <nav class="menu">
+                 <ul id="sidebar-menu" class="nav metismenu">
+                     <li <?php if($tab==1) { ?> class="active" <?php } ?>>
+                         <a href="/index/index"> <i class="fa fa-home"></i> Dashboard </a>
+                     </li>
+                     <li <?php if($tab==2) { ?> class="active" <?php } ?>>
+                         <a href="/index/search"><i class="fa fa-th-large"></i> Search Service <i class="fa arrow"></i></a>
+                     </li>
+                 </ul>
+             </nav>
+         </div>
+         <footer class="sidebar-footer">
+             <ul id="customize-menu" class="nav metismenu">
+                 <li>
+                     <a href="#"><i class="fa fa-cog"></i>  </a>
+                 </li>
+             </ul>
+         </footer>
+    </div>
+</aside>

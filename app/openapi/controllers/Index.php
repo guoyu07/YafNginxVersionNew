@@ -1,10 +1,9 @@
 <?php
 
-class IndexController extends Yaf_Controller_Abstract {
+class Controller_Index extends Base_Controller {
       
     public $actions = array(
         "index"     => "actions/index/Index.php",
-        "info"     => "actions/index/Info.php",
     );
 
 }

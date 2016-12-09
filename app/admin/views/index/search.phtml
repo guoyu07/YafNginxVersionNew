@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Chope Short Url Service">
+    <meta name="keywords" content="Chope Short Url Service">
+    <link rel="shortcut icon" href="http://static.chope.info/static/admin2/assets/img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="/static/thirdparty/bootstrap/3.3.5/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css" media="screen">
+    <title>Chope Short Url</title>
+</head>
+<body>
+<div class="wrapper">
+    <?php include "common/header.phtml" ?>
+    <?php include "common/sidebar.phtml" ?>
+    <div class="main">
+        <section class="section">
+            <div class="row sameheight-container">
+                <div class="col col-xs-12 col-sm-12 col-md-12 col-xl-12 same left">
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="title-block">
+                                <h4 class="title">Search Form</h4>
+                                <p class="title-description"> 
+                                    Chope shorten url funtion service 
+                                </p>
+                            </div>             
+                            <div class="box">
+                                Enter the URL：
+                                <input style="display:block;margin-top: 10px;" type="text" id="url" name="url" class="form-control" placeholder="Long Url Address" required autofocus><br>
+                                <button style="margin-top: 20px;" id="search" type="button" >SearchIt</button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </section>
+        <section class="section mt30">
+            <div class="row sameheight-container">
+                <div class="col col-xs-12 col-sm-12 col-md-12 col-xl-12 same left">
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="title-block">
+                                <h4 class="title">Search Result</h4>
+                                <p class="title-description"> 
+                                    Chope url search service 
+                                </p>
+                            </div>             
+                            <div class="box">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>keyword</th>
+                                            <th>md5</th>
+                                            <th>url</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="content">
+                                        
+                                    </tbody>
+                                </table>                
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="/static/thirdparty/jquery/1.11.3/jquery.min.js"></script>
+<script src="/static/thirdparty/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#search').click(function(){
+            var url = $('#url').val();
+            if (url.length < 1) {
+                alert('Please fill valid url address !');
+                return false;
+            }          
+            $.ajax({
+                type: 'get',
+                url: '/proxy/api?from=chope&method=short.search',
+                dataType:'json',
+                data:{url:url},
+                success:function(result){
+                    if(result.status.code==0){
+                        data = result.result;
+                        var html = '<tr><td>' + data.id + '</td><td>' + data.keyword + '</td><td>' + data.md5 + '</td><td>' + data.url + '</td></tr>';
+                        $('#content').html(html);
+                    } else {
+                        alert('url not exist !');
+                    }     
+                }    
+            }); 
+        });
+    }); 
+</script>
+</body>    
+</html>

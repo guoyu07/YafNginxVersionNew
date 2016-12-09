@@ -103,10 +103,10 @@ class Base_Message {
                     if(isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') { //POST
                         header("Content-Type: text/html");
                         $refer = isset($_SERVER['HTTP_REFERER']) ? parse_url($_SERVER['HTTP_REFERER']) : array();
-                        if(!empty($refer) && (substr($refer['host'],-8,8)=='chope.co')){
-                            $result = '<script>document.domain="chope.co";';
+                        if(!empty($refer) && (substr($refer['host'],-6,6)=='ur7.cn')){
+                            $result = '<script>document.domain="ur7.cn";';
                         }else{
-                            $result = '<script>document.domain="chope.net.cn";';
+                            $result = '<script>document.domain="ur7.cn";';
                         }
                         $result .= "parent.{$callback}({$json});</script>";
                         echo $result;

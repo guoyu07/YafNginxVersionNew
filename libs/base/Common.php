@@ -198,8 +198,7 @@ class Base_Common {
      * @return string/int
      */
     public static function alphaId($input, $toNum = false) {
-        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        //转数字
+        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         if ($toNum) {
             $integer = 0;
             $input = strrev( $input  );  
@@ -211,7 +210,6 @@ class Base_Common {
             }   
             return $integer;
         }
-        //转字符串
         $string = ''; 
         $len = strlen( $chars );
         while( $input >= $len ) { 

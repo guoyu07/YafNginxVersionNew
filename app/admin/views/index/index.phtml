@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Chope Short Url Service">
+    <meta name="keywords" content="Chope Short Url Service">
+    <link rel="shortcut icon" href="http://static.chope.info/static/admin2/assets/img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="/static/thirdparty/bootstrap/3.3.5/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css" media="screen">
+    <title>Chope Short Url</title>
+</head>
+<body>
+<div class="wrapper">
+    <?php include "common/header.phtml" ?>
+    <?php include "common/sidebar.phtml" ?>
+    <div class="main">
+        <section class="section">
+            <div class="row sameheight-container">
+                <div class="col col-xs-12 col-sm-12 col-md-12 col-xl-12 same left">
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="title-block">
+                                <h4 class="title">Shorten Form</h4>
+                                <p class="title-description"> 
+                                    Chope shorten url funtion service 
+                                </p>
+                            </div>             
+                            <div class="box">
+                                Enter the URL：
+                                <input style="display:block;margin-top: 10px;" type="text" id="url" name="url" class="form-control" placeholder="Long Url Address" required autofocus><br>
+                                Optional :: Custom short URL：
+                                <div style="color:red;margin:10px 0 20px;">
+                                1. <strong>Important!!</strong> Custom short url keyword should not begin with lower case letter 'a'.<br>
+                                2. Please default blank if need't use custom short url.<br>
+                                </div>
+                                <input style="display:block;margin-top: 10px;width:100px;" type="text" id="keyword" name="keyword" class="form-control" autofocus>
+                                <button style="margin-top: 20px;" id="ShortenIt" type="button" >ShortenIt</button>
+                            </div>
+                            
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </section>
+        <section class="section mt30">
+            <div class="row sameheight-container">
+                <div class="col col-xs-12 col-sm-12 col-md-12 col-xl-12 same left">
+                    <div class="card">
+                        <div class="card-block">
+                            <div id="url-list" class="urls">
+                                Yours chope short url list：<br><br> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="/static/thirdparty/jquery/1.11.3/jquery.min.js"></script>
+<script src="/static/thirdparty/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#ShortenIt').click(function(){
+            var longurl = $('#url').val();
+            var keyword = $('#keyword').val();
+            if (longurl.length < 1) {
+                alert('Please fill valid url address !');
+                return false;
+            }          
+            $.ajax({
+                type: 'get',
+                url: '/proxy/api?from=chope&method=short.custom',
+                dataType:'json',
+                data:{url:longurl, keyword:keyword},
+                success:function(result){
+                    if(result.status.code==0){
+                        data = result.result;
+                        $('#url-list').show();
+                        $('#url-list').append('<a target="_blank" href="' + data.url_short + '">' + data.url_short + '</a>');
+                    } else if (result.status.code==10001) {
+                        alert('Keword exists !');
+                    } else if (result.status.code==10002) {
+                        alert("keywors should not begin with character 'a'");
+                    } 
+                    else {
+                        alert('server error !');
+                    } 
+                }    
+            }); 
+        });
+    }); 
+</script>
+</body>    
+</html>

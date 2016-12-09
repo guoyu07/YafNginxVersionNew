@@ -2,17 +2,17 @@
 
 class Base_Http {
 
-    const HTTP_TIMEOUT = 3; // curl超时设置，单位是秒。基类方法可自定义重试次数，故而如果接口超时，最大重试次数倍此设置时间。
-    const HTTP_MAXREDIRECT = 2; // 301、302、303、307最大跳转次数。
-    const HTTP_REDO = 0; // 访问失败后的重试次数, 默认0次为不重试。
-    const HTTP_USERAGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0 Dagger/1.1';// 默认UA头
+    const HTTP_TIMEOUT = 3; 
+    const HTTP_MAXREDIRECT = 2; 
+    const HTTP_REDO = 0; 
+    const HTTP_USERAGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0 Dagger/1.1';
     const HTTP_MC_SERVER_KEY = 'chope';
     const HTTP_FLASE_LOCK_TIMES = 0;
     
     private static $httpUseragent = self::HTTP_USERAGENT;
     private static $httpLockTimes = self::HTTP_FLASE_LOCK_TIMES;
 
-    private static $last_header_info;
+    private static $lastHeaderInfo;
 
     private function __construct() {}
     private function __clone() {}
@@ -162,7 +162,7 @@ class Base_Http {
             Base_Log::debug("request_redo", 0, array($url));
         } while ($args['redo']-- > 0);
         curl_close($ch);
-        $runTime = Base_Common::addStatInfo('request', $start_run_time, 0);
+        $runTime = Base_Common::addStatInfo('request', $startRunTime, 0);
 
         self::$lastHeaderInfo = $header;
         // 抓取header时，解析header头

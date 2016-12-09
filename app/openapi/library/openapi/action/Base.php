@@ -16,10 +16,15 @@ class Openapi_Action_Base extends Base_Action  {
         $this->arrInput['from'] = isset($this->arrInput['from']) ? $this->arrInput['from'] : '';
         $this->arrInput['sign'] = isset($this->arrInput['sign']) ? $this->arrInput['sign'] : '';
        
-        if (empty($this->arrInput['from'])) {
+        if (empty($this->arrInput['from']) || !isset($this->arrInput['from'])) {
             Base_Log::warning('Please Apply Authorization Token !', 500, $this->arrInput);
             Base_Message::showError('Please Apply Authorization Token !', $this->arrInput);
         } 
+
+        if (!isset(Openapi_Conf_Common::$CLIENT_TOKENS[$this->arrInput['from']])) {
+            Base_Log::warning('Please Apply Authorization Token !', 500, $this->arrInput);
+            Base_Message::showError('Please Apply Authorization Token !', $this->arrInput);
+        }
  
         //sign校验
         $sysSign = Base_Common::getSign($this->arrInput, Openapi_Conf_Common::$CLIENT_TOKENS[$this->arrInput['from']]); 

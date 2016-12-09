@@ -11,12 +11,14 @@ class Openapi_Conf_Common {
     
     const CLIENT_MR3          = 'mr3';
     
- 
+    const CLIENT_ADMIN        = 'admin';
+      
     //CLIENT TOKEN
     public static $CLIENT_TOKENS = array (
         self::CLIENT_MAINWEBSITE          => '274c1db8781d22f3b4779239c9d94a3d',
         self::CLIENT_CHOPE                => '81b1c962eb2029720bc1a3ab95690de4', 
         self::CLIENT_OPENAPI              => 'd3cc7bb731aefe19ab80b93df34daf5e',
         self::CLIENT_MR3                  => '9e31dce39090b7f9ec76f95822367bfa',
+        self::CLIENT_ADMIN                => '21232f297a57a5a743894a0e4a801fc3',  
     );
 }
