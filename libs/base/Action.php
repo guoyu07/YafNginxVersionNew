@@ -12,9 +12,9 @@ class Base_Action extends Yaf_Action_Abstract  {
         $post = $this->getRequest()->getPost(); //全部的post参数                                                      
         $get = $this->getRequest()->getQuery(); //全部的get参数 
         $this->arrInput = array_merge($params, $post, $get);                                                          
-        foreach ($this->arrInput  as $key => $value) { 
-            $this->arrInput[$key] = htmlspecialchars(trim($this->arrInput[$key]), ENT_QUOTES);                        
-        }
+        
+        $security = new Base_Security();
+        $this->arrInput = $security->xss_clean($this->arrInput);                        
     }
 
     /**     

@@ -20,9 +20,9 @@ class Action_Api extends Admin_Action_Base {
         $uri = $methods[$method];
 
         $param = $this->arrInput;
- 
+
         try {
-            $apiclient = new Base_Proxy();
+            $apiclient = new Base_ApiProxy();
             $from = 'admin'; //source from is admin
             $result = $apiclient->call($uri, $param, $from);
             if (isset($result['status']['code']) && $result['status']['code'] == 0) {

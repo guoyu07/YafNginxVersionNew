@@ -21,11 +21,12 @@ class Openapi_Action_Base extends Base_Action  {
             Base_Message::showError('Please Apply Authorization Token !', $this->arrInput);
         } 
 
+        // call openapi's api need pass parameter from and sign, if from = chope, can not pass sign.But must pass from parameter. 
         if (!isset(Openapi_Conf_Common::$CLIENT_TOKENS[$this->arrInput['from']])) {
             Base_Log::warning('Please Apply Authorization Token !', 500, $this->arrInput);
             Base_Message::showError('Please Apply Authorization Token !', $this->arrInput);
         }
- 
+
         //sign校验
         $sysSign = Base_Common::getSign($this->arrInput, Openapi_Conf_Common::$CLIENT_TOKENS[$this->arrInput['from']]); 
         if ($sysSign !== $this->arrInput['sign'] && $this->arrInput['from'] != Openapi_Conf_Common::CLIENT_CHOPE) {

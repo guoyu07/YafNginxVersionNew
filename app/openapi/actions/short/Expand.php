@@ -12,8 +12,6 @@ class Action_Expand extends Openapi_Action_Base {
  
         $url = trim($this->arrInput['url']); 
                
-        $url = htmlspecialchars_decode($url);
-
         $url = urldecode($url);
             
         $arr = explode('/',  trim($url, '/'));

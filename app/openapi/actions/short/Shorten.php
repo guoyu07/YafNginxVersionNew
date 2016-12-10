@@ -10,7 +10,6 @@ class Action_Shorten extends Openapi_Action_Base {
             Base_Message::showError('params error', $this->arrInput);
         }
         $url = trim($this->arrInput['url']);
-        $url = htmlspecialchars_decode($url);
         
         $url = urldecode($url);
 
