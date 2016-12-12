@@ -637,7 +637,7 @@ class Base_DB {
 
     public function connect($masterOrSlave, $reConnect){
         
-        $config = Base_Config::getConf('db/mysql');
+        $config = Core_Conf::getConf('db/mysql');
         
         $masterOrSlave === 'master' || $masterOrSlave = 'slave';
         

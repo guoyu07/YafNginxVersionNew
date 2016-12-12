@@ -37,7 +37,7 @@ class Base_Redis {
      */
     public static function getInstance($master = false)
     {
-        $config = Base_Config::getConf('redis'); 
+        $config = Core_Conf::getConf('redis'); 
         if ($master) {
             $host = isset($_SERVER['DB_REDIS_HOST_W']) ? $_SERVER['DB_REDIS_HOST_W'] : $config['master']['host'];
             $port = isset($_SERVER['DB_REDIS_PORT_W']) ? $_SERVER['DB_REDIS_PORT_W'] : $config['master']['port']; 

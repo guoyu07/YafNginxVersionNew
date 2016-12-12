@@ -102,7 +102,7 @@ class Base_Log
     private static function writeLog($intLevel, $msg, $errno, $params = null, $depth = 0)
     {
         
-        $config = Base_Config::getConf('log/product');
+        $config = Core_Conf::getConf('log/product');
         self::$level = $config['level'];
         self::$path = $config['path'];
         self::$project = $config['project'];
@@ -115,9 +115,9 @@ class Base_Log
             return;
         }
         self::$current_log_level = $intLevel;
-   
+  
+        //Important!! 
         $logDir = self::$path . self::$project . '/' . self::$app .'/' . date('Ym');
-        //递归创建目录
         self::recursiveMkdir($logDir);        
         $strLogFile = $logDir . '/log';
 

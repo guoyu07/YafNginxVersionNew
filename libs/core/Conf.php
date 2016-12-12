@@ -9,8 +9,6 @@
 
 class Core_Conf 
 {
-    protected static $set_conf = null;
-    
     /* 
      * 获取配置
      * @param string $item: 指定配置项，表示获取全部配置
@@ -27,7 +25,5 @@ class Core_Conf
         }
         $config = new Yaf_Config_Ini(ROOT_PATH . '/conf/' . $filename, $section);
         return $config->toArray();
- 
-
     }
 }
