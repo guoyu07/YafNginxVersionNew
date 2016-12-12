@@ -446,6 +446,4 @@ class Base_Redis {
     public function zrevrangebyscore($key, $max, $min, $appends) {
         return self::$_instances[self::$_instanceKey]->zRevRangeByScore($key, $max, $min, $appends);
     }
-
-    
 }

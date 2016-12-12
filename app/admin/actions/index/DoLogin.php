@@ -19,8 +19,6 @@ class Action_DoLogin extends Admin_Action_Page {
             Base_Log::fatal('login failed', 500, array($this->arrInput, $userpass));
             $url = '/index/login';
         }
-        
         header("Location:{$url}"); 
- 
     }
 }

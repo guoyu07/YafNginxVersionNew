@@ -13,6 +13,8 @@ class Action_Shorten extends Openapi_Action_Base {
         
         $url = urldecode($url);
 
+        Base_Log::warning('eeee', 0, array(0));
+
         $shortUrlService = new Service_ShortUrl();  
         $result = $shortUrlService->shorten($url);
         if ($result) {

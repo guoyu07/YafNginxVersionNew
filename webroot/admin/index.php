@@ -1,3 +1,3 @@
 <?php
 
-Bd_Init::init()->bootstrap()->run();
+Core_Init::init()->bootstrap()->run();

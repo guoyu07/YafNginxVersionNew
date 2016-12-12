@@ -24,10 +24,17 @@ class Base_Log
     public static $current_log_level = null;
     public static $current_file = null;
     public static $current_line = null;
+    
     private static $level = null;
     private static $path = null;
+    private static $project = null;
     private static $app = null;
-    
+   
+
+    public function __construct($appName) {
+        self::$app = $appName;
+    }
+ 
     /**
      * debug日志
      *
@@ -95,11 +102,13 @@ class Base_Log
     private static function writeLog($intLevel, $msg, $errno, $params = null, $depth = 0)
     {
         
-        $config = Base_Config::getConf('log');
+        $config = Base_Config::getConf('log/product');
         self::$level = $config['level'];
         self::$path = $config['path'];
-        self::$app = $config['app'];
+        self::$project = $config['project'];
 
+        //当前app, Such as Admin/Openapi
+        self::$app = Core_AppEnv::getCurrApp();
 
         if ($intLevel > self::$level)
         {
@@ -107,7 +116,7 @@ class Base_Log
         }
         self::$current_log_level = $intLevel;
    
-        $logDir = self::$path . self::$app .'/' . date('Ym');
+        $logDir = self::$path . self::$project . '/' . self::$app .'/' . date('Ym');
         //递归创建目录
         self::recursiveMkdir($logDir);        
         $strLogFile = $logDir . '/log';

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * 配合Yaf的use_spl_autoload实现自己的自动加载函数，在Yaf的加载规则失败的时候会调用此加载函数
+ * 可以看之前实现的加载Smarty类库的调用方式
+ * @author Levin<levin@chope.co>
+ *
+ */
+
 defined ('APP_LIBS_VIEW') || define ('APP_LIBS_VIEW', ROOT_PATH . 'libs/view/');
 
 class Base_Autoloader {
@@ -73,4 +80,3 @@ class Base_Autoloader {
         self::includeFile($path, $filename);
     }
 }
-
